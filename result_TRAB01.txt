@@ -1,88 +1,78 @@
--------- Training for --------- 
-mIn       
+Entradas  
 +1      +1
 +1      -1
 -1      +1
 -1      -1
 
+Todos os targets
++1      +1      +1      +1
++1      +1      +1      -1
++1      +1      -1      +1
++1      +1      -1      -1
++1      -1      +1      +1
++1      -1      +1      -1
++1      -1      -1      +1
++1      -1      -1      -1
+-1      +1      +1      +1
+-1      +1      +1      -1
+-1      +1      -1      +1
+-1      +1      -1      -1
+-1      -1      +1      +1
+-1      -1      +1      -1
+-1      -1      -1      +1
+-1      -1      -1      -1
+
+
+
+-------- Training for ---------
 target  [ 1, 1, 1, 1 ]
 
 ---Final weights---
 w =  [ 0, 0 ]
 b =  4
 
--------- Training for ---------
-mIn
-+1      +1
-+1      -1
--1      +1
--1      -1
 
+-------- Training for ---------
 target  [ 1, 1, 1, -1 ]
 
 ---Final weights---
 w =  [ 2, 2 ]
 b =  2
 
--------- Training for ---------
-mIn
-+1      +1
-+1      -1
--1      +1
--1      -1
 
+-------- Training for ---------
 target  [ 1, 1, -1, 1 ]
 
 ---Final weights---
 w =  [ 2, -2 ]
 b =  2
 
--------- Training for ---------
-mIn
-+1      +1
-+1      -1
--1      +1
--1      -1
 
+-------- Training for ---------
 target  [ 1, 1, -1, -1 ]
 
 ---Final weights---
 w =  [ 4, 0 ]
 b =  0
 
--------- Training for ---------
-mIn
-+1      +1
-+1      -1
--1      +1
--1      -1
 
+-------- Training for ---------
 target  [ 1, -1, 1, 1 ]
 
 ---Final weights---
 w =  [ -2, 2 ]
 b =  2
 
--------- Training for ---------
-mIn
-+1      +1
-+1      -1
--1      +1
--1      -1
 
+-------- Training for ---------
 target  [ 1, -1, 1, -1 ]
 
 ---Final weights---
 w =  [ 0, 4 ]
 b =  0
 
--------- Training for ---------
-mIn
-+1      +1
-+1      -1
--1      +1
--1      -1
 
+-------- Training for ---------
 target  [ 1, -1, -1, 1 ]
 
 ---Final weights---
@@ -90,39 +80,24 @@ w =  [ 0, 0 ]
 b =  0
 ------------FALHA--------------
 
--------- Training for ---------
-mIn
-+1      +1
-+1      -1
--1      +1
--1      -1
 
+-------- Training for ---------
 target  [ 1, -1, -1, -1 ]
 
 ---Final weights---
 w =  [ 2, 2 ]
 b =  -2
 
--------- Training for ---------
-mIn
-+1      +1
-+1      -1
--1      +1
--1      -1
 
+-------- Training for ---------
 target  [ -1, 1, 1, 1 ]
 
 ---Final weights---
 w =  [ -2, -2 ]
 b =  2
 
--------- Training for ---------
-mIn
-+1      +1
-+1      -1
--1      +1
--1      -1
 
+-------- Training for ---------
 target  [ -1, 1, 1, -1 ]
 
 ---Final weights---
@@ -130,81 +105,55 @@ w =  [ 0, 0 ]
 b =  0
 ------------FALHA--------------
 
--------- Training for ---------
-mIn
-+1      +1
-+1      -1
--1      +1
--1      -1
 
+-------- Training for ---------
 target  [ -1, 1, -1, 1 ]
 
 ---Final weights---
 w =  [ 0, -4 ]
 b =  0
 
--------- Training for ---------
-mIn
-+1      +1
-+1      -1
--1      +1
--1      -1
 
+-------- Training for ---------
 target  [ -1, 1, -1, -1 ]
 
 ---Final weights---
 w =  [ 2, -2 ]
 b =  -2
 
--------- Training for ---------
-mIn
-+1      +1
-+1      -1
--1      +1
--1      -1
 
+-------- Training for ---------
 target  [ -1, -1, 1, 1 ]
 
 ---Final weights---
 w =  [ -4, 0 ]
 b =  0
 
--------- Training for ---------
-mIn
-+1      +1
-+1      -1
--1      +1
--1      -1
 
+-------- Training for ---------
 target  [ -1, -1, 1, -1 ]
 
 ---Final weights---
 w =  [ -2, 2 ]
 b =  -2
 
--------- Training for ---------
-mIn
-+1      +1
-+1      -1
--1      +1
--1      -1
 
+-------- Training for ---------
 target  [ -1, -1, -1, 1 ]
 
 ---Final weights---
 w =  [ -2, -2 ]
 b =  -2
 
--------- Training for ---------
-mIn
-+1      +1
-+1      -1
--1      +1
--1      -1
 
+-------- Training for ---------
 target  [ -1, -1, -1, -1 ]
 
 ---Final weights---
 w =  [ 0, 0 ]
 b =  -4
-ret  { sucesso: 14, falhas: 2 }
+
+
+Score de todos as funções lógicas
+--------------------------------
+ { sucesso: 14, falhas: 2 }

@@ -29,8 +29,8 @@ export class ANN{
   testAllLogicFunction(mIn: Array<number[]>, allPossibleTargets: Array<number[]>){
     const ret = {sucesso: 0, falhas:0}
     for (const targetVector of allPossibleTargets) {
-      console.log('Training for ')
-      printMatrix(mIn, 'mIn')
+      console.log('\n\n-------- Training for ---------')
+      // printMatrix(mIn, 'mIn')
       console.log('target ', targetVector);
       /// para cada possível target (saída) para funções lógicas treinar
       this.train(mIn, targetVector);
@@ -45,7 +45,8 @@ export class ANN{
         console.log('------------FALHA--------------');
       }
     }
-    console.log('ret ', ret);
+    console.log('\n\nScore de todas as funções lógicas \n--------------------------------\n', ret);
+    console.log('\n\n')
     return ret;
   }
 
