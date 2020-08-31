@@ -1,4 +1,4 @@
-import { printMatrix } from "./binary";
+import { printMatrix } from "../utils/binary";
 
 export class ANN{
   public w: number[];
@@ -11,15 +11,15 @@ export class ANN{
   train(inVectors: Array<number[]>, tVector: number[]){
     this.w = Array(this.nInputs).fill(0);
     this.b=0;
-    for (let iEpoch = 0; iEpoch < inVectors.length; iEpoch++) {
-      this.trainEpochByHebb(inVectors[iEpoch],tVector[iEpoch])    
+    for (let iDatum = 0; iDatum < inVectors.length; iDatum++) {
+      this.trainDatumByHebb(inVectors[iDatum],tVector[iDatum])    
     }
     console.log('\n---Final weights---')
     console.log('w = ', this.w)
     console.log('b = ', this.b)
   }
 
-  trainEpochByHebb(s: number[], t: number){
+  trainDatumByHebb(s: number[], t: number){
     this.b = this.b + t;
     for (let i = 0; i < this.nInputs; i++) {
       this.w[i] = this.w[i] + s[i]*t;
@@ -51,15 +51,15 @@ export class ANN{
   }
 
   test(inVectors: Array<number[]>, tVector: number[]){
-    for (let iEpoch = 0; iEpoch < inVectors.length; iEpoch++) {
-      if(!this.testEpoch(inVectors[iEpoch], tVector[iEpoch])){
+    for (let iDatum = 0; iDatum < inVectors.length; iDatum++) {
+      if(!this.testDatum(inVectors[iDatum], tVector[iDatum])){
         return false
       }
     }
     return true;
   }
 
-  testEpoch(s: number[], t: number){
+  testDatum(s: number[], t: number){
     let out = this.calcOut(s);
       if(out != t){
         return false

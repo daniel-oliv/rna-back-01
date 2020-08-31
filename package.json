@@ -2,7 +2,7 @@
   "name": "back-rna-01",
   "version": "1.0.0",
   "description": "",
-  "main": "dist/bin/main.js",
+  "main": "dist/src/main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "main-test": "nodemon --exec ts-node tests/main.test.ts",
@@ -11,10 +11,10 @@
     "build-npx": "npx tsc",
     "clear-build": "npm run clear && npm run build-npx",
     "dev": "npx nodemon",
-    "start": "nodemon --exec ts-node bin/main.ts",
-    "start-server": "rm -rf dist/ && npm run build && node --expose-gc  dist/bin/main.js",
-    "start-server-win": "npm run clear && npm run build-npx && node --expose-gc  dist/bin/main.js",
-    "start-more-memory": "npm run clear && npm run build-npx && node --expose-gc --max_old_space_size=4096 dist/bin/main.js"
+    "start": "nodemon --exec ts-node src/main.ts",
+    "start-server": "rm -rf dist/ && npm run build && node --expose-gc  dist/src/main.js",
+    "start-server-win": "npm run clear && npm run build-npx && node --expose-gc  dist/src/main.js",
+    "start-more-memory": "npm run clear && npm run build-npx && node --expose-gc --max_old_space_size=4096 dist/src/main.js"
   },
   "author": "",
   "license": "ISC",
