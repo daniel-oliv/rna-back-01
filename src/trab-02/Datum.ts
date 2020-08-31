@@ -14,6 +14,6 @@ export class DigitDatum extends Datum{
   {
     super();
     this.inVector = inMatrix.reduce((pre,cur)=>{return pre.concat(cur)},[])
-    console.log('this.inVector ', this.inVector);
+    // console.log('this.inVector ', this.inVector);
   }
 }

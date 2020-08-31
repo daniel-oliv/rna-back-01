@@ -6,11 +6,17 @@ export class ANN{
   outputNeurons: Neuron[];
 
   constructor(public nInputs: number, nOutputs: number){
-    this.outputNeurons = Array(nOutputs).fill(new Neuron(nInputs));
+    this.outputNeurons = Array(nOutputs);
+    for (let i = 0; i < nOutputs; i++) {
+      this.outputNeurons[i] = new Neuron(nInputs);
+    }
   }
 
   train(data: Datum[]){
+    let epoch = 0;
     do {
+      epoch++;
+      console.log('------------Epoch--------------', epoch);
       this.trainEpoch(data)
       //!PERCEPTRON - set wChanged to false for every epoch
       this.outputNeurons.forEach(n=>n.wChanged=false)
@@ -27,7 +33,8 @@ export class ANN{
 
     //?debug
     console.log('\n---Final weights---')
-    this.outputNeurons.forEach((n)=>{
+    this.outputNeurons.forEach((n, i)=>{
+      console.log('Neuron ', i)
       console.log('w = ', n.ws)
       console.log('b = ', n.b)
     })
@@ -41,7 +48,7 @@ export class ANN{
       const t = datum.targetVector[i];
       const neuron = this.outputNeurons[i];
       const out = outs[i];
-      /// if output is wrong, calc deltaW (dw) and db
+      //! FOR EVERY OUTPUT NEURON if output is wrong, calc deltaW (dw) and db
       if(out!==t){
         const dw = datum.inVector.map((x)=>t*x);
         const db = t;
@@ -66,18 +73,20 @@ export class ANN{
     return outs;
   }
 
-  testDataset(data: Datum[]){
-    const res = {erros: 0, notLearned: []}
+  testDataset(data: Datum[]): Result{
+    const res: Result = {erros: 0, notLearned: []}
     for (const datum of data) {
       if(!this.testDatum(datum)){
         ++res.erros;
         res.notLearned.push(datum.id);
       }
     }
+    return res;
   }
 
   testDatum(datum: Datum){
     const outs = this.calcOuts(datum);
+    console.log('testDatum() outs ', outs);
     for (let i = 0; i < this.outputNeurons.length; i++) {
       const t = datum.targetVector[i];
       const out = outs[i];
@@ -88,4 +97,9 @@ export class ANN{
     }
     return true;
   }
+}
+
+export interface Result{
+  erros: number,
+  notLearned: (string|number)[]
 }
