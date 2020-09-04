@@ -4,29 +4,33 @@ import { Datum } from "./Datum";
 
 export class ANN{
   outputNeurons: Neuron[];
+  learningRate: number;
 
-  constructor(public nInputs: number, nOutputs: number){
+  constructor(public nInputs: number, nOutputs: number, learningRate: number = 1, theta?: number){
     this.outputNeurons = Array(nOutputs);
     for (let i = 0; i < nOutputs; i++) {
-      this.outputNeurons[i] = new Neuron(nInputs);
+      this.outputNeurons[i] = new Neuron(nInputs,theta);
     }
+    this.learningRate = learningRate;
   }
 
-  train(data: Datum[]){
+  async train(data: Datum[]){
+    //! resetting neurons weights
+    this.outputNeurons.forEach(n=>n.resetWeights())
+    
     let epoch = 0;
     do {
       epoch++;
       console.log('------------Epoch--------------', epoch);
-      this.trainEpoch(data)
       //!PERCEPTRON - set wChanged to false for every epoch
       this.outputNeurons.forEach(n=>n.wChanged=false)
+      this.trainEpoch(data)
 
     } while (this.outputNeurons.some(n=>n.wChanged));
+    return true;
   }
 
   private trainEpoch(data: Datum[]){
-    //! resetting neurons weights
-    this.outputNeurons.forEach(n=>n.resetWeights())
     for (const datum of data) {
       this.trainDatum(datum)    
     }
@@ -50,7 +54,7 @@ export class ANN{
       const out = outs[i];
       //! FOR EVERY OUTPUT NEURON if output is wrong, calc deltaW (dw) and db
       if(out!==t){
-        const dw = datum.inVector.map((x)=>t*x);
+        const dw = datum.inVector.map((x)=>t*x*this.learningRate);
         const db = t;
         /// se de fato algum delta for diferente de zero, ou seja, se os pesos realmente mudaram
         if(dw.some(d=>d!==0) || db!==0){

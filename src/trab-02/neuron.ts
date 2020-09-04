@@ -11,6 +11,7 @@ export class Neuron{
     this.ws = Array(this.nInputs).fill(0);
     this.b=0;
   }
+  //? Calcula a saída do neurônio
   out(inputs:number[]){
     return this.f(this.inNeuron(inputs))
   }
@@ -20,7 +21,7 @@ export class Neuron{
     if(inNeuron > this.theta){
       return 1;
     }
-    else if(inNeuron < this.theta){
+    else if(inNeuron < -this.theta){
       return -1;
     }
     else{
