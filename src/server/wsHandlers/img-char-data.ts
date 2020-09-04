@@ -32,7 +32,7 @@ export class ImgCharDataHandler{
       console.log('theta ', theta);
       console.log('learningRate ', learningRate);
       const res = await imgCharDataService.trainNet(datasetID, learningRate, theta)
-      const ret: WsAck = {url: msg.url, type: 'END_OK'}
+      const ret: WsAck = {url: msg.url, body:res, type: 'END_OK'}
       ws.send(JSON.stringify(ret));
     }
 

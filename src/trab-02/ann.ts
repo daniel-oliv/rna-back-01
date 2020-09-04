@@ -8,6 +8,7 @@ export class ANN{
 
   constructor(public nInputs: number, nOutputs: number, learningRate: number = 1, theta?: number){
     this.outputNeurons = Array(nOutputs);
+    // console.log('ANN theta ', theta);
     for (let i = 0; i < nOutputs; i++) {
       this.outputNeurons[i] = new Neuron(nInputs,theta);
     }
@@ -27,7 +28,7 @@ export class ANN{
       this.trainEpoch(data)
 
     } while (this.outputNeurons.some(n=>n.wChanged));
-    return true;
+    return {epoch};
   }
 
   private trainEpoch(data: Datum[]){

@@ -18,6 +18,7 @@ export class Neuron{
   
   ///activation function
   private f(inNeuron: number){
+    console.log('theta ', this.theta)
     if(inNeuron > this.theta){
       return 1;
     }

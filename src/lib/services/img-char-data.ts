@@ -22,7 +22,7 @@ export class ImgCharDataService {
       return d.id===datasetID})[0]
     const nInputs = dataset.data[0].inVector.length
     const nOutput = dataset.data[0].targetVector.length;
-    this.ann = new ANN(nInputs, nOutput, learningRate);
+    this.ann = new ANN(nInputs, nOutput, learningRate, theta);
     const res = await this.ann.train(dataset.data);
     console.log('res ', res);
     return res;
