@@ -58,6 +58,11 @@ export default class MongoDriver{
     // return db.collection(collection).find(condition).toArray();
     return MongoDriver.db.collection(collection).find(condition).toArray();
   }
+
+  static updateOne(collection: string, condition, newEl) {
+    // return db.collection(collection).find(condition).toArray();
+    return MongoDriver.db.collection(collection).updateOne(condition, newEl);
+  }
   
   static findManyLimit = (collection: string, condition,limit) => {
     // return db.collection(collection).find(condition).toArray();

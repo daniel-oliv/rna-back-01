@@ -2,7 +2,7 @@ import * as fs from 'fs'
 import {promisify} from 'util'
 const csv = require('csv');
 import * as logger from 'winston';
-const ou = require("../helpers/object-utils")
+const ou = require("../utils/object-utils")
 
 // console.log('csvParser ', csv);
 // Convert fs.readFile into Promise version of same    
@@ -38,10 +38,14 @@ export async function parseCSV(filePath: string, toObject: boolean,delimiter: st
 
 export function createAndWriteFile(buff: string, file_name: string)
 {
-    let dir = "./logMsgFiles/"
+    let dir = "./files/"
     if (!fs.existsSync(dir)){
         fs.mkdirSync(dir);
     }
+
+    if (!fs.existsSync(dir+ file_name)){
+      fs.unlinkSync(dir+ file_name);
+  }
     
     fs.writeFile(dir+ file_name, buff, function(err: any){
         //Caro ocorra algum erro

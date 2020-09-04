@@ -82,7 +82,7 @@ export class ANN{
     for (const datum of data) {
       if(!this.testDatum(datum)){
         ++res.erros;
-        res.notLearned.push(datum.id);
+        res.notLearned.push({id:datum.id, outs: this.calcOuts(datum)});
       }
     }
     return res;
@@ -105,5 +105,8 @@ export class ANN{
 
 export interface Result{
   erros: number,
-  notLearned: (string|number)[]
+  notLearned: {
+    id:(string|number)
+    outs: number[];
+  }[]
 }

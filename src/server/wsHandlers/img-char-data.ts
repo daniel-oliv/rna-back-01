@@ -10,6 +10,8 @@ export class ImgCharDataHandler{
   static url: string = '/img-char-data';
 
   static async handle(ws: WebSocket, msg: WsMsg){
+    console.log('handle msg.type', msg.type)
+    console.log('handle msg.params', msg.params)
     if(msg.type === 'POST' && msg.params.res ==='dataset'){
       const dataset = <Dataset>msg.params.dataset;
       const res = await imgCharDataService.addAndSaveOnDB(dataset)

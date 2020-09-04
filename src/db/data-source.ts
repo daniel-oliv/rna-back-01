@@ -16,8 +16,12 @@ export default class DataSource{
     return MongoDriver.findMany(DataSource.getCollectionName(entityClassName), objCondition);
   }
 
-  static getByCOD_ID(entityClassName: string, COD_ID: string){
-    let objCondition = JSON.parse(`{"COD_ID":"${COD_ID}"}`); 
+  static updateOne(collection: string, condition, newEl) {
+    return MongoDriver.updateOne(collection, condition, newEl);
+  }
+
+  static getByCOD_ID(entityClassName: string, id: string){
+    let objCondition = JSON.parse(`{"id":"${id}"}`); 
     // logger.debug('DataSource Entity ' + this.getCollectionName(entityClassName));
     // logger.debug('DataSource objCondition' + JSON.stringify(objCondition,null,2));
     return MongoDriver.findOne(DataSource.getCollectionName(entityClassName), objCondition);
