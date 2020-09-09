@@ -1,7 +1,8 @@
 import { Dataset } from "../../trab-02/interfaces/interfaces/dataset";
 import DataSource from "../../db/data-source";
-import { ANN } from "../../trab-02/ann";
+import { Adaline as ANN, AdalineParams } from "../../trab-04/adaline/adaline";
 import { createOrAppendFile, readFile, createAndWriteFile } from "../../utils/fileMan";
+import { AnnParams } from "../../trab-04/base/ann";
 
 const ImgCharDataCollection = 'imgchardata'
 
@@ -15,15 +16,15 @@ export class ImgCharDataService {
 
   private ann: ANN;
 
-  async trainNet(datasetID: string, learningRate?: number, theta?: number){
+  async trainNet(datasetID: string, annParams: AdalineParams, listener: (...args: any[]) => void){
     console.log('trainNet id ', datasetID);
     const dataset = this.datasets.filter(d=>{
       console.log('d.id ', d.id);
       return d.id===datasetID})[0]
     const nInputs = dataset.data[0].inVector.length
     const nOutput = dataset.data[0].targetVector.length;
-    this.ann = new ANN(nInputs, nOutput, learningRate, theta);
-    const res = await this.ann.train(dataset.data);
+    this.ann = new ANN(annParams);
+    const res = this.ann.train(dataset.data, listener);
     console.log('res ', res);
     return res;
   }

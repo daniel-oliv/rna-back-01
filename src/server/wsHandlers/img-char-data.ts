@@ -27,11 +27,12 @@ export class ImgCharDataHandler{
 
     if(msg.type === 'POST' && msg.params.res ==='trainNet'){
       const datasetID = msg.params.datasetID;
-      const theta = msg.params.theta;
-      const learningRate = msg.params.learningRate;
-      console.log('theta ', theta);
-      console.log('learningRate ', learningRate);
-      const res = await imgCharDataService.trainNet(datasetID, learningRate, theta)
+      const annParams = msg.params.ann
+      const res = await imgCharDataService.trainNet(datasetID, annParams, 
+        (result)=> {
+        const ret: WsAck = {url: msg.url, id: msg.id, body:result, type: 'DATA'} 
+        ws.send(JSON.stringify(ret))
+      })
       const ret: WsAck = {url: msg.url, body:res, type: 'END_OK'}
       ws.send(JSON.stringify(ret));
     }
