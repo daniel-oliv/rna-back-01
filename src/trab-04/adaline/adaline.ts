@@ -53,6 +53,7 @@ export class Adaline extends ANN{
         this.notLearned++;
       }
         this.squareError += (t-netIn)**2;
+        // console.log('netIn ', netIn);
         const dw = datum.inVector.map((x)=>(t-netIn)*x*this.learningRate);
         const db = (t-netIn)*this.learningRate;
         /// se de fato algum delta for diferente de zero, ou seja, se os pesos realmente mudaram

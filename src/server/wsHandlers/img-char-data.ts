@@ -25,7 +25,7 @@ export class ImgCharDataHandler{
       ws.send(JSON.stringify(ret));
     }
 
-    if(msg.type === 'POST' && msg.params.res ==='trainNet'){
+    if(msg.type === 'subscribe' && msg.params.res ==='trainNet'){
       const datasetID = msg.params.datasetID;
       const annParams = msg.params.ann
       const res = await imgCharDataService.trainNet(datasetID, annParams, 

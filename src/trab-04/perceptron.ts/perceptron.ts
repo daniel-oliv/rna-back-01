@@ -49,7 +49,8 @@ export class Perceptron extends ANN{
       const out = outs[i];
       const netIn = neuron.in;
       //! FOR EVERY OUTPUT NEURON if output is wrong, calc deltaW (dw) and db
-      this.squareError += (t-netIn)**2;
+      this.squareError += (t-out)**2;
+      // console.log('netIn ', netIn);
       if(out!==t){
         const dw = datum.inVector.map((x)=>t*x*this.learningRate);
         const db = t;
@@ -62,6 +63,7 @@ export class Perceptron extends ANN{
           /// if some dW !=0 set wChanged
           neuron.wChanged = true;
         }
+        this.notLearned++;
         const absV = dw.concat(db).map(d=>Math.abs(d))
         const maxDelta = Math.max(...absV)
         if(maxDelta > this.dwAbsMax){

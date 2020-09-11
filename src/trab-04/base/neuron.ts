@@ -21,8 +21,8 @@ export class Neuron{
         this.b=0;
         break;
       case 'random':
-        const params = (<InitWeightsRandom>mode).params 
-        this.ws = [...Array(this.nInputs)].map(() => (Math.random() * params.initWLimit));
+        const wLimit = (<InitWeightsRandom>mode).wLimit
+        this.ws = [...Array(this.nInputs)].map(() => (Math.random() * wLimit));
         this.b=0;
         break;
       default:
@@ -63,12 +63,9 @@ export class Neuron{
 
 export interface InitWeightsMode{
   name: 'zeros' | 'random',
-  params: any;
 } 
 
-export interface InitWeightsRandom{
+export interface InitWeightsRandom extends InitWeightsMode{
   name: 'random',
-  params: {
-    initWLimit: number;
-  };
+  wLimit: number;
 } 

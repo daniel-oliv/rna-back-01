@@ -4,6 +4,7 @@ import { EventEmitter } from 'events';
 import { printMatrix } from "../../utils/binary";
 import { Neuron, InitWeightsRandom, InitWeightsMode } from "./neuron";
 import { Datum } from "../Datum";
+import { sleep } from '../../utils/common';
 
 
 export abstract class  ANN{
@@ -42,7 +43,7 @@ export abstract class  ANN{
     }
   }  
 
-  train(data: Datum[], listener: (...args: any[]) => void){
+  async train(data: Datum[], listener: (...args: any[]) => void){
     ANN.emitter$.addListener('train',listener);
     this.epoch = 0;
     //! resetting neurons weights
@@ -54,6 +55,7 @@ export abstract class  ANN{
       this.eachEpoch();
       this.trainEpoch(data)
       ANN.emitter$.emit('train',this.trainResult())
+      await sleep(100);
     } while (!this.stop());
 
     ANN.emitter$.removeListener('train',listener)
@@ -129,7 +131,7 @@ export interface AnnParams{
   theta: number;
 }
 
-export type AnnType = 'perceptron' | 'adaline';
+export type AnnType = 'Perceptron' | 'Adaline';
 
 export interface TestResult{
   erros: number,
