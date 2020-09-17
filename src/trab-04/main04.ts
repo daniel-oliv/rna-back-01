@@ -1,6 +1,6 @@
 import { Adaline, AdalineParams } from "./adaline/adaline";
 import { DigitDatum } from "./Datum";
-import { Perceptron } from "./perceptron.ts/perceptron";
+import { Perceptron } from "./perceptron/perceptron";
 
 export async function main04(){
 

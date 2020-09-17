@@ -2,7 +2,6 @@ import * as fs from 'fs'
 import {promisify} from 'util'
 const csv = require('csv');
 import * as logger from 'winston';
-const ou = require("../utils/object-utils")
 
 // console.log('csvParser ', csv);
 // Convert fs.readFile into Promise version of same    
@@ -12,9 +11,9 @@ export async function fileExist(filePath: string){
   return fs.existsSync(filePath);
 }
 
-export async function parseCSV(filePath: string, toObject: boolean,delimiter: string = ";"): Promise<Promise<any[]>>{
+export function parseCSV<T = string[]>(filePath: string, toObject: boolean,delimiter: string = ";"): Promise<T[]>{
   logger.debug("parseCSV " + filePath);
-  logger.debug("delimiter- " + delimiter);
+  logger.debug("delimiter " + delimiter);
   return new Promise((res,rej)=>{
     let results: any[] = [];
       fs.createReadStream(filePath)
@@ -24,8 +23,8 @@ export async function parseCSV(filePath: string, toObject: boolean,delimiter: st
         // logger.debug(`fileMan parseCSV data: ${data}`)
       })
       .on('end', () => {
-        ou.log('[fileMan.ts] parseCSV - ', filePath)
-        ou.log('[fileMan.ts] parseCSV - ', results[0])
+        // logger.debug('[fileMan.ts] parseCSV - '+ filePath)
+        // logger.debug('[fileMan.ts] parseCSV - ', results[0])
         res(results as []);
       })
       .on('error', (error: Error) => {

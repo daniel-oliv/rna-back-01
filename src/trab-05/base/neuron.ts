@@ -1,18 +1,37 @@
-export class Neuron{
+export abstract class Neuron{
+
+  public nInputs: number
+  
   public ws: number[];
   public b: number;
+
+  /// APÓS A ÚLTIMA VALIDAÇÃO BEM SUCEDIDA
+  public preWs: number[];
+  public preB: number;
+  
   public in: number;
-  // public out: number
+  public fOut: number;
+
+  /// saída quantizada
+  public out: number;
+
   //!PERCEPTRON
   public wChanged = false;
-  constructor(
-    public nInputs: number, 
-    public theta: number = 0
-  )
+
+  constructor(params: NeuronInit)
   { 
-
-
+    Object.assign(this,params)
   }
+
+  ///activation function
+  protected abstract f(): number
+  
+  /// limited out: -1 e 1 or 0 e 1, por exemplo
+  protected abstract limitedOut():number
+
+  ///train factor
+  abstract trainFac(t: number):number
+  
 
 
   resetWeights(mode:InitWeightsMode){
@@ -32,27 +51,17 @@ export class Neuron{
     }
     
   }
-  //? Calcula a saída do neurônio
-  out(inputs:number[]){
-    this.in = this.inNeuron(inputs);
-    return this.f(this.in)
+  //? Calcula e retorna a saída do neurônio or enquanto
+  setInAndOut(inputs:number[]){
+    this.in = this.calcIn(inputs);
+    this.fOut = this.f();
+    this.out = this.limitedOut()
+    return this.out;
   }
   
-  ///activation function
-  private f(inNeuron: number){
-    // console.log('theta ', this.theta)
-    if(inNeuron > this.theta){
-      return 1;
-    }
-    else if(inNeuron < -this.theta){
-      return -1;
-    }
-    else{
-      return 0;
-    }
-  }
+  
 
-  private inNeuron(inputs: number[]){
+  protected calcIn(inputs: number[]){
     let sum = this.b; 
     for (let i = 0; i < inputs.length; i++) {
       sum += this.ws[i]*inputs[i]
@@ -70,3 +79,7 @@ export interface InitWeightsRandom extends InitWeightsMode{
   name: 'random',
   wLimit: number;
 } 
+
+export interface NeuronInit{
+  nInputs: number
+}

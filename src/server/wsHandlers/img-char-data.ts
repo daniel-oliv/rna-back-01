@@ -15,13 +15,13 @@ export class ImgCharDataHandler{
     if(msg.type === 'POST' && msg.params.res ==='dataset'){
       const dataset = <Dataset>msg.params.dataset;
       const res = await imgCharDataService.addAndSaveOnDB(dataset)
-      const err: WsAck = {url: msg.url, type: 'END_OK'}
+      const err: WsAck = {url: msg.url, type: 'END_OK', id:msg.id}
       ws.send(JSON.stringify(err));
     }
 
     else if(msg.type === 'GET' && msg.params.res ==='dataset'){
       const res = await imgCharDataService.getAllOnDB()
-      const ret: WsAck = {url: msg.url, body: res, type: 'END_OK'}
+      const ret: WsAck = {url: msg.url, body: res, type: 'END_OK', id:msg.id}
       ws.send(JSON.stringify(ret));
     }
 
@@ -33,7 +33,7 @@ export class ImgCharDataHandler{
         const ret: WsAck = {url: msg.url, id: msg.id, body:result, type: 'DATA'} 
         ws.send(JSON.stringify(ret))
       })
-      const ret: WsAck = {url: msg.url, body:res, type: 'END_OK'}
+      const ret: WsAck = {url: msg.url, body:res, type: 'END_OK', id:msg.id}
       ws.send(JSON.stringify(ret));
     }
 
@@ -41,7 +41,18 @@ export class ImgCharDataHandler{
       console.log('testNet ');
       const datasetID = msg.params.datasetID;
       const res = await imgCharDataService.testNet(datasetID)
-      const ret: WsAck = {url: msg.url, body: res, type: 'END_OK'}
+      const ret: WsAck = {url: msg.url, body: res, type: 'END_OK', id:msg.id}
+      ws.send(JSON.stringify(ret));
+    }
+
+    if(msg.type === 'subscribe' && msg.params.res ==='trainAndTestSonar'){
+      const annParams = msg.params.ann
+      const res = await imgCharDataService.trainAndTestSonar(annParams, 
+        (result)=> {
+        const ret: WsAck = {url: msg.url, id: msg.id, body:result, type: 'DATA'} 
+        ws.send(JSON.stringify(ret))
+      })
+      const ret: WsAck = {url: msg.url, body:res, type: 'END_OK', id:msg.id}
       ws.send(JSON.stringify(ret));
     }
     

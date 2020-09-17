@@ -7,6 +7,22 @@ export function randomInt(maxExcluded){
   return Math.floor(Math.random() * maxExcluded);
 }
 
+export function sdBy(data: any[], mean: number, func: (...args : any[])=>number) {
+  return Math.sqrt(varianceBy(data, mean, func));
+}
+
+export function varianceBy(data: any[], mean: number, func: (...args : any[])=>number) {
+  let sd = 0;
+  let dif;
+  mean = +mean;
+  for (const datum of data) {
+      dif = (+func(datum)-mean)
+      sd += dif*dif;
+  }
+  //console.log('total ', total);
+  return sd / data.length;
+}
+
 export function sd(data, mean, keys) {
   return Math.sqrt(variance(data, mean, keys));
 }
