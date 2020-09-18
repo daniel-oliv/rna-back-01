@@ -57,6 +57,7 @@ export class SigmoidPerceptron extends ANN{
       const out = outs[i];
       const inNeuron = neuron.in;
       const trainFac = neuron.trainFac(t);
+      // console.log('trainFac ', trainFac);
       //! FOR EVERY OUTPUT NEURON
       this.squareError += (t-neuron.fOut)**2;
       if(out!==t){
@@ -83,10 +84,14 @@ export class SigmoidPerceptron extends ANN{
     const ret = {
       epoch: this.epoch, 
       notLearned: this.notLearned, 
+      notLearnedPer: this.notLearned/this.setsLength.train,
       dwAbsMax: this.dwAbsMax,
       squareError: this.squareError,
     }
-    if(this.lastValidationErrors)  ret['lastValidationErrors']=this.lastValidationErrors
+    if(this.lastValidationErrors){
+      ret['lastValidationErrors']=this.lastValidationErrors
+      ret['lastValidationErrorsPer']=this.lastValidationErrors/this.setsLength.validation
+    }
     return ret;
   }  
 }

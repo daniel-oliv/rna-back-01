@@ -31,12 +31,12 @@ export async function main05(){
     // theta: 0.01,
     sigma: 1,
     maxEpoch: 500,
-    dwAbsMin: 0,
+    dwAbsMin: 0.00001,
   }
   const ann = new SigmoidPerceptron(params);
 
-  // const ret = await ann.train(dataset.data.slice(0,167),(res)=>console.log(res));
-  // console.log('ret ', ret);
+  const ret = await ann.train(dataset.data.concat(),(res)=>console.log(res));
+  console.log('ret ', ret);
   // const res = ann.testDataset(dataset.data.slice(167,208));
   // console.log('res ', JSON.stringify(res,null,2))
 }

@@ -17,12 +17,12 @@ export class SigmoidNeuron extends Neuron  {
   }
 
   limitedOut(){
-    // return this.fOut > 0.5 ? 1 : 0;
+    // return this.fOut > 0.5 ? 1 : -1;
     return this.fOut > 0 ? 1 : -1;
   }
 
   trainFac(t:number){
-    // const outDerivative = this.out *(1-this.out)
+    // const outDerivative = this.sigma*this.fOut *(1-this.fOut)
     const outDerivative = (this.sigma/2) *(1+this.fOut)*(1-this.fOut)
     return (t-this.fOut)*outDerivative;
   } 

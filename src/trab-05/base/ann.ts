@@ -82,7 +82,7 @@ export abstract class  ANN{
       this.eachEpoch();
       this.trainEpoch(data)
       ANN.emitter$.emit('train',this.trainResult())
-      await sleep(100);
+      await sleep(25);
     } while (!this.stop());
 
     ANN.emitter$.removeListener('train',listener)
@@ -120,7 +120,7 @@ export abstract class  ANN{
   }
 
   testDataset(data: Datum[]): TestResult{
-    const res: TestResult = {erros: 0, notLearned: []}
+    const res: TestResult = {erros: 0, errosPer:0, notLearned: []}
     for (const datum of data) {
       if(!this.testDatum(datum)){
         ++res.erros;
@@ -131,6 +131,7 @@ export abstract class  ANN{
         });
       }
     }
+    res.errosPer = res.erros/this.setsLength.test
     return res;
   }
 
@@ -156,6 +157,10 @@ export abstract class  ANN{
       if(this.epoch>1 && currentErros > this.lastValidationErrors){
         ret = true;
         console.log('---isSpecifying---');
+        this.outputNeurons.forEach(n=>{
+          n.b = n.preB;
+          n.ws = n.preWs.concat();
+        })
       }else{
         this.outputNeurons.forEach(n=>{
           n.preB = n.b;
@@ -186,13 +191,14 @@ export interface AnnParams{
   initWeightsMode: InitWeightsMode;
   learningRate: number;
   theta?: number;
-  setsLength: SetsLength
+  setsLength?: SetsLength
 }
 
 export type AnnType = 'Perceptron' | 'Adaline' | 'Sigmoid Perceptron';
 
 export interface TestResult{
   erros: number,
+  errosPer?: number;
   notLearned: {
     id:(string|number)
     fOuts: number[];
