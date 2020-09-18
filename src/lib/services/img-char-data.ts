@@ -30,6 +30,9 @@ export class ImgCharDataService {
       // console.log('rawData ', rawData);
       this.sonarSet = new SonarDataset(rawData)
     }
+
+    this.sonarSet.data = shuffle(this.sonarSet.data)
+
     const dataset = this.sonarSet;
     const nInputs = dataset.data[0].inVector.length
     const nOutputs = dataset.data[0].targetVector.length;
