@@ -1,0 +1,359 @@
+{
+	"alpha": {
+    "scope": "",
+    "prefix": "alpha",
+    "body": [
+      "α"
+    ]
+  },
+  "beta": {
+    "scope": "",
+    "prefix": "beta",
+    "body": [
+      "β"
+    ]
+  },
+  "gamma": {
+    "scope": "",
+    "prefix": "gamma",
+    "body": [
+      "γ"
+    ]
+  },
+  "Gamma": {
+    "scope": "",
+    "prefix": "Gamma",
+    "body": [
+      "Γ"
+    ]
+  },
+  "LaTeX - vargamma": {
+    "scope": "",
+    "prefix": "vargamma",
+    "body": [
+      "\\vargamma "
+    ]
+  },
+  "delta": {
+    "scope": "",
+    "prefix": "delta",
+    "body": [
+      "δ"
+    ]
+  },
+  "Delta": {
+    "scope": "",
+    "prefix": "Delta",
+    "body": [
+      "Δ"
+    ]
+  },
+  "LaTeX - epsilon": {
+    "scope": "",
+    "prefix": "epsilon",
+    "body": [
+      "\\epsilon "
+    ]
+  },
+  "LaTeX - varepsilon": {
+    "scope": "",
+    "prefix": "varepsilon",
+    "body": [
+      "\\varepsilon "
+    ]
+  },
+  "LaTeX - zeta": {
+    "scope": "",
+    "prefix": "zeta",
+    "body": [
+      "\\zeta "
+    ]
+  },
+  "LaTeX - eta": {
+    "scope": "",
+    "prefix": "eta",
+    "body": [
+      "\\eta "
+    ]
+  },
+  "LaTeX - theta": {
+    "scope": "",
+    "prefix": "theta",
+    "body": [
+      "\\theta "
+    ]
+  },
+  "LaTeX - Theta": {
+    "scope": "",
+    "prefix": "Theta",
+    "body": [
+      "\\Theta "
+    ]
+  },
+  "LaTeX - vartheta": {
+    "scope": "",
+    "prefix": "vartheta",
+    "body": [
+      "\\vartheta "
+    ]
+  },
+  "LaTeX - iota": {
+    "scope": "",
+    "prefix": "iota",
+    "body": [
+      "\\iota "
+    ]
+  },
+  "LaTeX - kappa": {
+    "scope": "",
+    "prefix": "kappa",
+    "body": [
+      "\\kappa "
+    ]
+  },
+  "LaTeX - lambda": {
+    "scope": "",
+    "prefix": "lambda",
+    "body": [
+      "\\lambda "
+    ]
+  },
+  "LaTeX - Lambda": {
+    "scope": "",
+    "prefix": "Lambda",
+    "body": [
+      "\\Lambda "
+    ]
+  },
+  "LaTeX - mu": {
+    "scope": "",
+    "prefix": "mu",
+    "body": [
+      "\\mu "
+    ]
+  },
+  "LaTeX - nu": {
+    "scope": "",
+    "prefix": "nu",
+    "body": [
+      "\\nu "
+    ]
+  },
+  "LaTeX - xi": {
+    "scope": "",
+    "prefix": "xi",
+    "body": [
+      "\\xi "
+    ]
+  },
+  "LaTeX - Xi": {
+    "scope": "",
+    "prefix": "Xi",
+    "body": [
+      "\\Xi "
+    ]
+  },
+  "LaTeX - pi": {
+    "scope": "",
+    "prefix": "pi",
+    "body": [
+      "\\pi "
+    ]
+  },
+  "LaTeX - Pi": {
+    "scope": "",
+    "prefix": "Pi",
+    "body": [
+      "\\Pi "
+    ]
+  },
+  "LaTeX - varpi": {
+    "scope": "",
+    "prefix": "varpi",
+    "body": [
+      "\\varpi "
+    ]
+  },
+  "LaTeX - rho": {
+    "scope": "",
+    "prefix": "rho",
+    "body": [
+      "\\rho "
+    ]
+  },
+  "LaTeX - varrho": {
+    "scope": "",
+    "prefix": "varrho",
+    "body": [
+      "\\varrho "
+    ]
+  },
+  "LaTeX - sigma": {
+    "scope": "",
+    "prefix": "sigma",
+    "body": [
+      "\\sigma "
+    ]
+  },
+  "LaTeX - Sigma": {
+    "scope": "",
+    "prefix": "Sigma",
+    "body": [
+      "\\Sigma "
+    ]
+  },
+  "LaTeX - varsigma": {
+    "scope": "",
+    "prefix": "varsigma",
+    "body": [
+      "\\varsigma "
+    ]
+  },
+  "LaTeX - tau": {
+    "scope": "",
+    "prefix": "tau",
+    "body": [
+      "\\tau "
+    ]
+  },
+  "LaTeX - upsilon": {
+    "scope": "",
+    "prefix": "upsilon",
+    "body": [
+      "\\upsilon "
+    ]
+  },
+  "LaTeX - Upsilon": {
+    "scope": "",
+    "prefix": "Upsilon",
+    "body": [
+      "\\Upsilon "
+    ]
+  },
+  "LaTeX - phi": {
+    "scope": "",
+    "prefix": "phi",
+    "body": [
+      "\\phi "
+    ]
+  },
+  "LaTeX - Phi": {
+    "scope": "",
+    "prefix": "Phi",
+    "body": [
+      "\\Phi "
+    ]
+  },
+  "LaTeX - varphi": {
+    "scope": "",
+    "prefix": "varphi",
+    "body": [
+      "\\varphi "
+    ]
+  },
+  "LaTeX - chi": {
+    "scope": "",
+    "prefix": "chi",
+    "body": [
+      "\\chi "
+    ]
+  },
+  "LaTeX - psi": {
+    "scope": "",
+    "prefix": "psi",
+    "body": [
+      "\\psi "
+    ]
+  },
+  "LaTeX - Psi": {
+    "scope": "",
+    "prefix": "Psi",
+    "body": [
+      "\\Psi "
+    ]
+  },
+  "LaTeX - omega": {
+    "scope": "",
+    "prefix": "omega",
+    "body": [
+      "\\omega "
+    ]
+  },
+  "LaTeX - Omega": {
+    "scope": "",
+    "prefix": "Omega",
+    "body": [
+      "\\Omega "
+    ]
+  },
+  "LaTeX - digamma": {
+    "scope": "",
+    "prefix": "digamma",
+    "body": [
+      "\\digamma "
+    ]
+  },
+  "LaTeX - Digamma": {
+    "scope": "",
+    "prefix": "Digamma",
+    "body": [
+      "\\Digamma "
+    ]
+  },
+  "LaTeX - aleph": {
+    "scope": "",
+    "prefix": "aleph",
+    "body": [
+      "\\aleph "
+    ]
+  },
+  "LaTeX - beth": {
+    "scope": "",
+    "prefix": "beth",
+    "body": [
+      "\\beth "
+    ]
+  },
+  "LaTeX - gimel": {
+    "scope": "",
+    "prefix": "gimel",
+    "body": [
+      "\\gimel "
+    ]
+  },
+  "LaTeX - daleth": {
+    "scope": "",
+    "prefix": "daleth",
+    "body": [
+      "\\daleth "
+    ]
+  },
+  "LaTeX - cup": {
+    "scope": "",
+    "prefix": "cup",
+    "body": [
+      "\\cup "
+    ]
+  },
+  "LaTeX - cap": {
+    "scope": "",
+    "prefix": "cap",
+    "body": [
+      "\\cap "
+    ]
+  },
+  "LaTeX - sqcup": {
+    "scope": "",
+    "prefix": "sqcup",
+    "body": [
+      "\\sqcup "
+    ]
+  },
+  "LaTeX - sqcap": {
+    "scope": "",
+    "prefix": "sqcap",
+    "body": [
+      "\\sqcap "
+    ]
+  }
+}
