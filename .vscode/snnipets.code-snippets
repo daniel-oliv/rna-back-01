@@ -52,7 +52,7 @@
     "scope": "",
     "prefix": "epsilon",
     "body": [
-      "\\epsilon "
+      "ϵ"
     ]
   },
   "LaTeX - varepsilon": {
@@ -66,28 +66,28 @@
     "scope": "",
     "prefix": "zeta",
     "body": [
-      "\\zeta "
+      "ζ"
     ]
   },
   "LaTeX - eta": {
     "scope": "",
     "prefix": "eta",
     "body": [
-      "\\eta "
+      "η"
     ]
   },
   "LaTeX - theta": {
     "scope": "",
     "prefix": "theta",
     "body": [
-      "\\theta "
+      "θ"
     ]
   },
   "LaTeX - Theta": {
     "scope": "",
     "prefix": "Theta",
     "body": [
-      "\\Theta "
+      "θ"
     ]
   },
   "LaTeX - vartheta": {
@@ -101,7 +101,7 @@
     "scope": "",
     "prefix": "iota",
     "body": [
-      "\\iota "
+      "ι"
     ]
   },
   "LaTeX - kappa": {
@@ -115,7 +115,7 @@
     "scope": "",
     "prefix": "lambda",
     "body": [
-      "\\lambda "
+      "λ"
     ]
   },
   "LaTeX - Lambda": {
@@ -129,7 +129,7 @@
     "scope": "",
     "prefix": "mu",
     "body": [
-      "\\mu "
+      "μ"
     ]
   },
   "LaTeX - nu": {
@@ -157,7 +157,7 @@
     "scope": "",
     "prefix": "pi",
     "body": [
-      "\\pi "
+      "π"
     ]
   },
   "LaTeX - Pi": {
@@ -178,7 +178,7 @@
     "scope": "",
     "prefix": "rho",
     "body": [
-      "\\rho "
+      "ρ"
     ]
   },
   "LaTeX - varrho": {
@@ -192,14 +192,14 @@
     "scope": "",
     "prefix": "sigma",
     "body": [
-      "\\sigma "
+      "σ"
     ]
   },
   "LaTeX - Sigma": {
     "scope": "",
     "prefix": "Sigma",
     "body": [
-      "\\Sigma "
+      "Σ"
     ]
   },
   "LaTeX - varsigma": {
@@ -234,14 +234,14 @@
     "scope": "",
     "prefix": "phi",
     "body": [
-      "\\phi "
+      "ϕ"
     ]
   },
   "LaTeX - Phi": {
     "scope": "",
     "prefix": "Phi",
     "body": [
-      "\\Phi "
+      "Φ"
     ]
   },
   "LaTeX - varphi": {
@@ -276,14 +276,14 @@
     "scope": "",
     "prefix": "omega",
     "body": [
-      "\\omega "
+      "ω"
     ]
   },
   "LaTeX - Omega": {
     "scope": "",
     "prefix": "Omega",
     "body": [
-      "\\Omega "
+      "Ω"
     ]
   },
   "LaTeX - digamma": {

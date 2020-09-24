@@ -6,7 +6,7 @@ import { AnnParams } from "../../trab-05/base/ann";
 import { ANN } from "../../trab-05/base/ann";
 import { PerceptronParams, Perceptron } from "../../trab-05/perceptron/perceptron";
 import { SigmoidPerceptron, SigmoidPerceptronParams } from "../../trab-05/sigmoid-perceptron/perceptron";
-import { SonarDataset } from "../../trab-05/dataset-class";
+import { SonarDataset } from "../../trab-05/sonar-dataset";
 import { shuffle } from "lodash";
 
 const ImgCharDataCollection = 'imgchardata'

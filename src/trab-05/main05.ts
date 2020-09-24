@@ -1,6 +1,6 @@
 import { shuffle } from "lodash";
 import { parseCSV } from "../utils/fileMan";
-import { SonarDataset } from "./dataset-class";
+import { SonarDataset } from "./sonar-dataset";
 import { SonarDatum } from "./Datum";
 import { SigmoidPerceptron, SigmoidPerceptronParams } from "./sigmoid-perceptron/perceptron";
 
