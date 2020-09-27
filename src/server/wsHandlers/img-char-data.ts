@@ -1,5 +1,6 @@
 import { WsMsg, WsAck } from "./ws-msg";
 import { imgCharDataService } from "../../lib/services/img-char-data";
+import { mlpService } from "../../lib/services/mlp-service";
 import { Dataset } from "../../trab-02/interfaces/interfaces/dataset";
 
 export class ImgCharDataHandler{
@@ -56,5 +57,26 @@ export class ImgCharDataHandler{
       ws.send(JSON.stringify(ret));
     }
     
+    if(msg.type === 'subscribe' && msg.params.res ==='trainAndTestMLP'){
+      const annParams = msg.params.ann
+      const res = await mlpService.trainAndTest(msg.params.datasetID, annParams, 
+        (result)=> {
+        const ret: WsAck = {url: msg.url, id: msg.id, body:result, type: 'DATA'} 
+        ws.send(JSON.stringify(ret))
+      })
+      const ret: WsAck = {url: msg.url, body:res, type: 'END_OK', id:msg.id}
+      ws.send(JSON.stringify(ret));
+    }
+
+    if(msg.type === 'subscribe' && msg.params.res ==='trainCrossValidation'){
+      const annParams = msg.params.ann
+      const res = await mlpService.trainCrossValidation(msg.params.datasetID, annParams, 
+        (result)=> {
+        const ret: WsAck = {url: msg.url, id: msg.id, body:result, type: 'DATA'} 
+        ws.send(JSON.stringify(ret))
+      })
+      const ret: WsAck = {url: msg.url, body:res, type: 'END_OK', id:msg.id}
+      ws.send(JSON.stringify(ret));
+    }
   }
 }

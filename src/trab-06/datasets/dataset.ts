@@ -1,18 +1,25 @@
-import { maxBy, meanBy, minBy } from "lodash";
-import { sdBy } from "../utils/common";
-import { SonarDatum } from "./Datum";
+import { maxBy, meanBy, minBy, shuffle } from "lodash";
+import { sdBy } from "../../utils/common";
+import { Datum } from "./Datum";
 
-export class SonarDataset{
-  public data: SonarDatum[];
+export abstract class  Dataset{
+  id: string;
   public state: DatasetState;
   public features: FeatureData[];
-  constructor(public rawData: string[][], standardize = false){
+  public data: Datum[];
+  constructor(id, public rawData: string[][]){
     this.state = 'Unmodified'
-    this.data = this.rawData.map(d=>new SonarDatum(d))
+    this.initData();
     this.setFeatures()
-    this.standardize();
-    // this.normalize();
+    // this.standardize();
+    this.normalize(-1,1);
   }
+
+  randomlySort(){
+    this.data = shuffle(this.data)
+  }
+
+  protected abstract initData()
 
   private setFeatures(){
     const nFeatures = this.data[0].inVector.length;
@@ -53,7 +60,7 @@ export class SonarDataset{
     // }
   }
 
-  normalize(){
+  normalize(ymin:number, ymax){
     if(this.state !== 'Normalized' ){
       this.state = 'Normalized';
       for (const datum of this.data) {
@@ -62,7 +69,7 @@ export class SonarDataset{
           // console.log('feat ', feat);
           // console.log('i ', i);
           // console.log('d ', d);
-          return (d-feat.min)/(feat.max-feat.min);
+          return (d-feat.min)/(feat.max-feat.min)*(ymax-ymin)+ymin;
         })
       }
     }
