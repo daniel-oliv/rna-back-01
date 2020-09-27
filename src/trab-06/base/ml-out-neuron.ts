@@ -22,22 +22,22 @@ export class MlOutNeuron extends Neuron implements MlOutNeuronInit{
     return this.fOut > 0 ? 1 : -1;
   }
 
-  setΔws(){
-    
-  }
-
-  updateWs(t:number): number[]{
+  setΔws(t:number){
     //! ATENÇÃO: SÓ FIZ df(in) PQ NA FUNÇÃO SIGMOID a f' DEPENDE DA f(in)
     const dfIn = this.df(this.fOut)
     this.δ = (t-this.fOut)*dfIn;
-    const dw = this.inNeurons.map((n)=>{ 
+    this.Δws = this.inNeurons.map((n)=>{ 
       // console.log('this.α ', this.α);
       return this.α*this.δ*n.fOut
     });
-    const db = this.α*this.δ;
-    this.ws = this.ws.map((w,i)=>w+dw[i]);
-    this.b=this.b+db;
-    return [db].concat(dw)
+    this.Δb = this.α*this.δ;
+
+    return [this.Δb].concat(this.Δws)
+  }
+
+  updateWs(){
+    this.ws = this.ws.map((w,i)=>w+this.Δws[i]);
+    this.b=this.b+this.Δb;
   }
   
 } 

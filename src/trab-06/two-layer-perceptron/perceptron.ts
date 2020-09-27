@@ -121,10 +121,13 @@ export class TLP extends ANN implements TLP_Params{
     const dws: number[] = [];
     for (let i = 0; i < this.outputNeurons.length; i++) {
       const neuron = this.outputNeurons[i]
-      dws.push(...neuron.updateWs(targetVector[i]));
+      dws.push(...neuron.setΔws(targetVector[i]));
     }
     for (const neuron of this.hiddenLayer) {
       dws.push(...neuron.updateWs());
+    }
+    for (const neuron of this.outputNeurons) {
+      neuron.updateWs()
     }
     
     return dws;
