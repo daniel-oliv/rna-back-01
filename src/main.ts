@@ -3,7 +3,7 @@ import { configuration } from '../config/configuration';
 import { initSources } from './db/data-source';
 import { WsServer } from './server/ws-server';
 import MongoDriver from './db/mongo-driver';
-import { currentMain } from './trab-06/main';
+import { currentMain } from './trab-07/main';
 
 
 async function main(){
@@ -13,7 +13,7 @@ async function main(){
     await initSources(config)
     // const docs = await MongoDriver.findMany('imgchardata', {})
     await (new WsServer().listen())// new Server().listen();
-    // await currentMain()
+    await currentMain()
   } catch (error) {
     console.log(error)
   }
