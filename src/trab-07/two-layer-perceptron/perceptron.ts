@@ -1,8 +1,11 @@
+import * as logger from 'winston'
+
 import { Datum } from "../datasets/Datum";
+import {byEpoch, lowΔw} from "../stop-condition"
 import { ANN, AnnParams } from "../base/ann";
 import { MlOutNeuron } from "../base/ml-out-neuron";
 import { MlInNeuron } from "../base/ml-in-neuron";
-
+import { loggers } from "winston";
 /**
  * @class
  * Two layer perceptron
@@ -23,11 +26,6 @@ export class TLP extends ANN implements TLP_Params{
   outputNeurons: MlOutNeuron[];
   hiddenLayer: MlInNeuron[];
   
-  /// output
-  epoch: number;
-  notLearned: number;
-  dwAbsMax: number;
-  squareError: number;  
 
   constructor(params:TLP_Params
     ){
@@ -68,9 +66,7 @@ export class TLP extends ANN implements TLP_Params{
   }
 
   eachEpoch(){
-    //! ADALINE
-    this.squareError = 0
-    this.dwAbsMax = 0;
+    super.eachEpoch();
   }
 
   protected onTrainEnd(){
@@ -99,11 +95,7 @@ export class TLP extends ANN implements TLP_Params{
     })
   }
 
-  stop(): boolean{
-    return this.maxEpoch && (this.epoch >= this.maxEpoch) || 
-      this.epoch > 3 && this.dwAbsMax < this.dwAbsMin ||
-      this.isSpecifying()
-  }
+  stopConditions = [byEpoch, lowΔw, this.isSpecifying]
 
   protected calcLimOuts(datum: Datum): number[]{
     const outs: number[] = [];
@@ -117,17 +109,37 @@ export class TLP extends ANN implements TLP_Params{
     return outs;
   }
 
-  protected updateWs(targetVector: number[]): number[]{
+  protected setDWs(targetVector: number[]){
+    for (let i = 0; i < this.outputNeurons.length; i++) {
+      const neuron = this.outputNeurons[i]
+      neuron.setΔws(targetVector[i]);
+    }
+    for (const neuron of this.hiddenLayer) {
+      neuron.setΔws();
+    }
+  }
+
+  protected addDWs(targetVector: number[]): number[]{
     const dws: number[] = [];
     for (let i = 0; i < this.outputNeurons.length; i++) {
       const neuron = this.outputNeurons[i]
-      dws.push(...neuron.setΔws(targetVector[i]));
+      neuron.sumΔws(targetVector[i]);
+    }
+    for (const neuron of this.hiddenLayer) {
+      neuron.sumΔws();
+    }
+    
+    return dws;
+  }
+
+  protected updateWs(): number[]{
+    const dws: number[] = [];
+    for (let i = 0; i < this.outputNeurons.length; i++) {
+      const neuron = this.outputNeurons[i]
+      dws.push(...neuron.updateWs());
     }
     for (const neuron of this.hiddenLayer) {
       dws.push(...neuron.updateWs());
-    }
-    for (const neuron of this.outputNeurons) {
-      neuron.updateWs()
     }
     
     return dws;
@@ -137,13 +149,28 @@ export class TLP extends ANN implements TLP_Params{
     //!MLP TRAINING -> CHANGE ACCORDING WITH Y_IN - NET INPUT
     /// calc out
     const outs = this.calcLimOuts(datum);
-    
-    const dws = this.updateWs(datum.targetVector);
-    const absV = dws.map(dw=>Math.abs(dw));
-    const maxDelta = Math.max(...absV)
+    if(this.iBatch === 0 && this.iBatch !== this.lenBatch){
+      /// setΔWs
+      // console.log('setΔWs ');
+      this.setDWs(datum.targetVector);
+      this.iBatch++;
+    } else {
+      /// addΔWs
+      // console.log('addΔWs ');
+      this.addDWs(datum.targetVector);
+      this.iBatch++;
+      if(this.iBatch === this.lenBatch){
+        // console.log('updateWs ');
+        this.iBatch = 0;
+        ///updateΔWs 
+        const dws = this.updateWs();
+        const absV = dws.map(dw=>Math.abs(dw));
+        const maxDelta = Math.max(...absV)
 
-    if(maxDelta > this.dwAbsMax){
-      this.dwAbsMax = maxDelta
+        if(maxDelta > this.dwAbsMax){
+          this.dwAbsMax = maxDelta
+        }
+      }
     }
     for (let i = 0; i < this.outputNeurons.length; i++) {
       const t = datum.targetVector[i];

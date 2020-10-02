@@ -1,4 +1,4 @@
-import { InitWeightsMode, InitWeightsRandom, NeuronInit } from "./neuron";
+import { InitWeightsModeParams, InitWeightsRandom, NeuronInit } from "./neuron";
 import { Neuron } from "./neuron";
 
 export abstract class InNeuron extends Neuron{

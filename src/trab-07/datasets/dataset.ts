@@ -11,8 +11,10 @@ export abstract class  Dataset{
     this.state = 'Unmodified'
     this.initData();
     this.setFeatures()
-    // this.standardize();
-    this.normalize(-1,1);
+    // FIXME - VOLTAR NORMALIZE E COLOCAR MAIS NEURÔNIOS NA CAMADA ESCONDIDA - se não adiantar, pode ser melhor aumentar o range do PCA, pois deu 99 naquela outra estatística
+    // Pode ser interessante fazer PCA apenas para um número???? acho que não exemplos não fazem, mas 1 é muito diferente de 2, enquanto rostos são parecidos
+    this.standardize();
+    // this.normalize(-1,1);
   }
 
   randomlySort(){
@@ -53,13 +55,13 @@ export abstract class  Dataset{
       }
     }
 
-    for (let i = 0; i < this.features.length; i++) {
-      const mean = meanBy(this.data,d=>d.inVector[i])
-      const sd= sdBy(this.data,mean,d=>d.inVector[i])
-      console.log('mean ', mean);
-      console.log('sd ', sd);
+    // for (let i = 0; i < this.features.length; i++) {
+    //   const mean = meanBy(this.data,d=>d.inVector[i])
+    //   const sd= sdBy(this.data,mean,d=>d.inVector[i])
+    //   console.log('mean ', mean);
+    //   console.log('sd ', sd);
 
-    }
+    // }
   }
 
   normalize(ymin:number, ymax){

@@ -14,7 +14,7 @@
     "start": "nodemon --exec ts-node src/main.ts",
     "start-server": "rm -rf dist/ && npm run build && node --expose-gc  dist/src/main.js",
     "start-server-win": "npm run clear && npm run build-npx && node --expose-gc  dist/src/main.js",
-    "start-more-memory": "npm run clear && npm run build-npx && node --expose-gc --max_old_space_size=4096 dist/src/main.js"
+    "start-more-memory": "npm run clear && npm run build-npx && node --expose-gc --max_old_space_size=8192 dist/src/main.js"
   },
   "author": "",
   "license": "ISC",
@@ -26,6 +26,7 @@
     "express": "^4.17.1",
     "express-ws": "^4.0.0",
     "lodash": "^4.17.15",
+    "ml-pca": "^4.0.1",
     "mongodb": "^3.5.9",
     "winston": "^3.2.1"
   },

@@ -5,7 +5,9 @@ import { printMatrix } from "../../utils/binary";
 import { Datum } from "../datasets/Datum";
 import { sleep } from '../../utils/common';
 import { Neuron } from './neuron';
-import { InitWeightsMode, InitWeightsRandom } from './neuron';
+import { InitWeightsModeParams, InitWeightsRandom } from './neuron';
+import { StopCondition } from '../stop-condition';
+import { shuffle } from 'lodash';
 
 
 export abstract class  ANN{
@@ -15,20 +17,25 @@ export abstract class  ANN{
   initWeightsMode;
   learningRate: number = 0.001;
   theta: number = 0;
+  lenBatch: number;
   
   ///Layers and Architecture
   outputNeurons: Neuron[];
   
-  /// output
+  /// scores
   epoch: number;
   notLearned: number;
+  dwAbsMax: number;
+  squareError: number;  
 
   /// data
   validationSet: Datum[]
   lastValidationErrors: number;
   setsLength: SetsLength
 
+  // temp/algorithm variables
   isMoreSpecific: boolean;
+  iBatch: number;
 
   constructor(params: AnnParams){
     Object.assign(this, params)
@@ -38,11 +45,26 @@ export abstract class  ANN{
 
   protected abstract initNeurons()
   protected abstract onStartTrain()
-  protected abstract eachEpoch()
+  protected eachEpoch(){
+    this.squareError = 0;
+    this.dwAbsMax = 0;
+    this.iBatch = 0;
+  }
   protected abstract onTrainEnd()
-  protected abstract stop(): boolean
+  protected abstract stopConditions: StopCondition[]
   protected abstract updatePreWs()
   protected abstract retrieveWs()
+
+
+  stop(): boolean{
+    for (const condition of this.stopConditions) {
+      if(condition.stop()){
+        logger.info(`[two-layer-perceptron/perceptron,109] stop condition: ${condition.desc}`)
+        return true;
+      }
+    } 
+    return false;
+  }
 
   public async trainAndTest(dataset: Datum[], setsLen:SetsLength, listener: (...args: any[]) => void){
     const res = {}
@@ -104,7 +126,7 @@ export abstract class  ANN{
     do {
       this.notLearned = 0
       this.epoch++;
-      console.log('------------Epoch--------------', this.epoch);
+      logger.verbose('------------Epoch-------------- '+ this.epoch);
       this.eachEpoch();
       this.trainEpoch(data)
       ANN.emitter$.emit('train',this.trainResult())
@@ -125,25 +147,40 @@ export abstract class  ANN{
 
   printWs(layer: Neuron[]){
     layer.forEach((n, i)=>{
-      console.log('Neuron ', i)
-      console.log('w = ', n.ws)
-      console.log('b = ', n.b)
+      logger.info('Neuron ', i)
+      logger.info('w = ', n.ws)
+      logger.info('b = ', n.b)
     })
 
     if(this.isMoreSpecific){
-      console.log('\n---Previous and recommended weights---')
+      logger.info('\n---Previous and recommended weights---')
       layer.forEach((n, i)=>{
-        console.log('Neuron ', i)
-        console.log('w = ', n.preWs)
-        console.log('b = ', n.preB)
+        logger.info('Neuron ', i)
+        logger.info('w = ', n.preWs)
+        logger.info('b = ', n.preB)
       })
     }
   }
 
+  wsFile = './logs/ws.json'
+  protected writeFileWs(){
+
+  }
+
+  protected readFileWs(){
+    
+  }
+
   protected trainEpoch(data: Datum[]){
+    // let time: string;
+    console.time('trainEpoch');
+    data = shuffle(data);
     for (const datum of data) {
-      this.trainDatum(datum)    
+      // console.time('batch');
+      this.trainDatum(datum);
+      // console.timeEnd('batch');  
     }
+    console.timeEnd('trainEpoch');  
   }
 
   protected calcLimOuts(datum: Datum): number[]{
@@ -185,21 +222,25 @@ export abstract class  ANN{
     return true;
   }
 
-  isSpecifying(){
-    this.isMoreSpecific = false;
-    if(this.validationSet && this.epoch%30===0){
-      const res = this.testDataset(this.validationSet)
-      const currentErros = res.erros;
-      if(this.epoch>1 && currentErros > this.lastValidationErrors){
-        this.isMoreSpecific = true;
-        console.log('---isSpecifying---');
-        this.retrieveWs()
-      }else{
-        this.updatePreWs()
+  isSpecifying: StopCondition=
+  {
+    desc:'Especificou. Erros no conjunto de validação aumentaram',
+    stop: ()=>{
+      this.isMoreSpecific = false;
+      if(this.validationSet && this.epoch%30===0){
+        const res = this.testDataset(this.validationSet)
+        const currentErros = res.erros;
+        if(this.epoch>1 && currentErros > this.lastValidationErrors){
+          this.isMoreSpecific = true;
+          console.log('---isSpecifying---');
+          this.retrieveWs()
+        }else{
+          this.updatePreWs()
+        }
+        this.lastValidationErrors = currentErros;
       }
-      this.lastValidationErrors = currentErros;
+      return this.isMoreSpecific;
     }
-    return this.isMoreSpecific;
   }
 
   //! always unregister from the emitter
@@ -218,9 +259,10 @@ export interface AnnParams{
   type: AnnType;
   nInputs: number; 
   nOutputs: number; 
-  initWeightsMode: InitWeightsMode | InitWeightsRandom;
+  initWeightsMode: InitWeightsModeParams | InitWeightsRandom;
   learningRate: number;
   theta?: number;
+  lenBatch: number;
   setsLength?: SetsLength
 }
 

@@ -42,7 +42,7 @@ export abstract class Neuron{
   /// limited out: -1 e 1 or 0 e 1, por exemplo
   abstract limitedOut():number
 
-  resetWeights(mode:InitWeightsMode){
+  resetWeights(mode:InitWeightsModeParams){
     // console.log('resetWeights mode', mode);
     switch (mode.name) {
       case 'zeros':
@@ -54,6 +54,12 @@ export abstract class Neuron{
         this.ws = [...Array(this.nInputs)].map(() => (Math.random() * wLimit));
         this.b=0;
         break;
+      case 'continue':
+        // TODO - pega os pesos em método genérico
+          // const ws = (<InitWeightsRandom>mode).wLimit
+          // this.ws = [...Array(this.nInputs)].map(() => (Math.random() * wLimit));
+          // this.b=0;
+          break;
       default:
         console.log('resetWeights() Invalid mode ', mode);
         break;
@@ -79,11 +85,11 @@ export abstract class Neuron{
 
 }
 
-export interface InitWeightsMode{
-  name: 'zeros' | 'random',
+export interface InitWeightsModeParams{
+  name: 'zeros' | 'random'|'continue',
 } 
 
-export interface InitWeightsRandom extends InitWeightsMode{
+export interface InitWeightsRandom extends InitWeightsModeParams{
   name: 'random',
   wLimit: number;
 } 

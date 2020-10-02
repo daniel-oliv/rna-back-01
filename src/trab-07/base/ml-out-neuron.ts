@@ -8,7 +8,7 @@ export class MlOutNeuron extends Neuron implements MlOutNeuronInit{
   }
 
   setInNeurons(inNeurons:Neuron[]){
-    console.log('inNeurons ', inNeurons);
+    // console.log('inNeurons ', inNeurons);
     this.inNeurons = inNeurons;
   }
 
@@ -22,10 +22,14 @@ export class MlOutNeuron extends Neuron implements MlOutNeuronInit{
     return this.fOut > 0 ? 1 : -1;
   }
 
-  setΔws(t:number){
-    //! ATENÇÃO: SÓ FIZ df(in) PQ NA FUNÇÃO SIGMOID a f' DEPENDE DA f(in)
+  calcDerivIn(t: number){
+    //! ATENÇÃO: SÓ FIZ derivada(f(in))=derivada(fout) PQ NA FUNÇÃO SIGMOID a f' DEPENDE DA f(in)=fout
     const dfIn = this.df(this.fOut)
     this.δ = (t-this.fOut)*dfIn;
+  }
+
+  setΔws(t:number){
+    this.calcDerivIn(t)
     this.Δws = this.inNeurons.map((n)=>{ 
       // console.log('this.α ', this.α);
       return this.α*this.δ*n.fOut
@@ -35,9 +39,21 @@ export class MlOutNeuron extends Neuron implements MlOutNeuronInit{
     return [this.Δb].concat(this.Δws)
   }
 
+  sumΔws(t:number){
+    this.calcDerivIn(t)
+    this.Δws = this.inNeurons.map((n, i)=>{ 
+      // console.log('this.α ', this.α);
+      return this.Δws[i]+this.α*this.δ*n.fOut
+    });
+    this.Δb += this.α*this.δ;
+
+    // return [this.Δb].concat(this.Δws)
+  }
+
   updateWs(){
     this.ws = this.ws.map((w,i)=>w+this.Δws[i]);
     this.b=this.b+this.Δb;
+    return [this.Δb].concat(this.Δws);
   }
   
 } 

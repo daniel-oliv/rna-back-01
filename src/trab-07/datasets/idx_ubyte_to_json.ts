@@ -36,7 +36,7 @@ function binToJSON(numOfImgs: number, dataBuffer: Buffer, labelsBuffer): MnistRa
   return ret;
 }
 
-export type MnistRawDatum = {data:number[], label:string};
+export type MnistRawDatum = {data:number[], label:string, dataPCA?: number[]};
 
 
 // console.log(JSON.stringify(pixelValues.slice.));
