@@ -51,8 +51,10 @@ Retirei mas:
 
 Colocar o PCA e testar com validação cruzada
 - Não deve ajudar, pois o erro no conjunto de treino está quase a mesma coisa no validação cruzada
+- Realmente 20% de erro no conjunto de teste
 
 Depois vou retirar o PCA
+
 
 Vou colocar mais uma camada de 10 neurônios (16 na primeira)
 

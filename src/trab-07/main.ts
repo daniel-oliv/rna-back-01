@@ -60,7 +60,7 @@ export async function currentMain(){
     maxEpoch: 50,
     dwAbsMin: 0.00001,
     lenBatch: 100,
-    setsLength: {train: Math.floor(/* 0.80* */trainSet.data.length), 
+    setsLength: {train: Math.floor(0.80*trainSet.data.length), 
       test: testSet.data.length, 
       validation: Math.floor(0.20*trainSet.data.length)
     }
@@ -75,10 +75,10 @@ export async function currentMain(){
   const listener = (res)=>logger.verbose(JSON.stringify(res,null,2));
   // let timeStr = getTimeString();
   console.time('trainAndTest');
-  // const res = await ann.trainAndTest(trainSet.data.concat(testSet.data), params.setsLength, listener);
+  const res = await ann.trainAndTest(trainSet.data.concat(testSet.data), params.setsLength, listener);
   console.timeEnd('trainAndTest');
   // console.time('trainCrossValidation');
-  const res = await ann.trainCrossValidation(trainSet.data.concat(testSet.data), params.setsLength, (res)=>console.log('res ', res));
+  // const res = await ann.trainCrossValidation(trainSet.data.concat(testSet.data), params.setsLength, (res)=>console.log('res ', res));
   // console.timeEnd('trainCrossValidation');  
   console.log('res FINAL', res)
   logger.info(`[trab-07/main,84] RES FINAL  ${JSON.stringify(res,null,2)}`)
