@@ -15,6 +15,7 @@ export abstract class  Dataset{
     // Pode ser interessante fazer PCA apenas para um número???? acho que não exemplos não fazem, mas 1 é muito diferente de 2, enquanto rostos são parecidos
     this.standardize();
     // this.normalize(-1,1);
+    // this.normalize(0,255);
   }
 
   randomlySort(){

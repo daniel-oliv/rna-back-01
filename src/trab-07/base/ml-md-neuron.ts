@@ -13,6 +13,11 @@ export class MlMdNeuron extends Neuron implements MlMdNeuronInit{
     super(params)
   }
 
+  setInNeurons(inNeurons:Neuron[]){
+    // console.log('inNeurons ', inNeurons);
+    this.inNeurons = inNeurons;
+  }
+
   //called after setInputNeurosn 
   setOutNeurons(outNeurons:Neuron[]){
     this.outNeurons = outNeurons;

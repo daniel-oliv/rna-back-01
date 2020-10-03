@@ -266,7 +266,7 @@ export interface AnnParams{
   setsLength?: SetsLength
 }
 
-export type AnnType = 'Perceptron' | 'Adaline' | 'Sigmoid Perceptron'|'Two Layer Perceptron';
+export type AnnType = 'Perceptron' | 'Adaline' | 'Sigmoid Perceptron'|'Two Layer Perceptron'|'Three Layer Perceptron';
 
 export interface TestResult{
   erros: number,

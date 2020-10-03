@@ -14,17 +14,28 @@ export const BipolarSigmoidFactory=(sigma:number)=> {
 }
 
 export type ActivationFunction = {
-  f:()=>number,
+  f:(input: number)=>number,
   df:(fOut: number)=>number
 }
 
-export type ActivationFunctionName = 'Bipolar Sigmoid'
+export const relu: ActivationFunction = {
+  f:(input: number)=>
+    (input > 0 ? input : 0),
+  df:(fOut: number)=>{
+    return (fOut > 0 ? 1 : 0);
+  } 
+}
+
+export type ActivationFunctionName = 'Bipolar Sigmoid' | 'Relu'
 
 
 export function getActFun(params : NeuronInit){
   switch (params.actFunName) {
     case 'Bipolar Sigmoid':
       return BipolarSigmoidFactory(params.sigma)
+      break;
+    case "Relu":
+      return relu;
       break;
   
     default:
