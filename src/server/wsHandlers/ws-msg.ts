@@ -16,6 +16,16 @@ export function wsEventMsgFac(msg: WsEventMsg): WsEventMsg{
   return Object.assign({}, msg,{id:randomInt(1000000)})
 }
 
+export function WsFac(type: string,  url: string,  id?: number,  params?: any, body?: any): WsMsg{
+  return  {
+    type,
+    url,
+    id,
+    params,
+    body
+  }
+}
+
 export interface WsRestMsg extends WsMsg{
   type: 'GET'|'PUT'|'DELETE'|'POST',
 }

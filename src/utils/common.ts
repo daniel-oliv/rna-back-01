@@ -7,6 +7,10 @@ export function randomInt(maxExcluded){
   return Math.floor(Math.random() * maxExcluded);
 }
 
+export function randInRange(max: number, min: number){
+  return Math.random()*(max-min)+min;
+}
+
 export function sdBy(data: any[], mean: number, func: (...args : any[])=>number) {
   return Math.sqrt(varianceBy(data, mean, func));
 }

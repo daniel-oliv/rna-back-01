@@ -1,6 +1,18 @@
 import * as logger from 'winston'
 import { groupBy as groupByLodash, isEqual} from 'lodash';
 
+export const minIndex = (arr)=>{
+  let minI = 0;
+  let minV = arr[0]
+  for (let i = 1; i < arr.length; i++) {
+    if(minV <  arr[i]){
+      minI = i;
+      minV = arr[i];
+    }
+  }
+  return minI;
+}
+
 export function forAssign(arr: any[], fun: Function, options?:any){
   arr.forEach((element,index,arra) => {
     arra[index] = fun(element, options)

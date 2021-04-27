@@ -18,7 +18,7 @@ function trainAndTestHebb(nInputs: number){
 }
 // trainAndTestHebb(2);
 
-//! Questão 2.2
+//! Questão 2.5
 function questao2_5(){
   const mtxInputs = [
     [1, 1, 1, 1],
